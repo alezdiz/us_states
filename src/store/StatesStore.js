@@ -15,7 +15,7 @@ class StatesStore {
   }
 
   getStates() {
-    fetch(process.env.REACT_APP_API_URI + "/us_state")
+    fetch("http://" + window.location.hostname + ":3001/us_state")
       .then(res => res.json())
       .then(states => {
         states = states.filter(state => !this.trash.includes(state.abbreviation))
