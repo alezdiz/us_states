@@ -119,7 +119,6 @@
     background-repeat: no-repeat;
 }
 .list {
-    /*width: 220px;*/
     border: none;
     padding-left: 10px;
     margin-right: 15px;
@@ -131,21 +130,27 @@ button:focus {
 }
 .fg-search {
     position: relative;
-    /*width: 360px;*/
 }
 
 .fg-search input {
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
     text-indent: 32px;
     padding: 10px;
     display: block;
     width: 420px;
     height: 20px;
     margin: 15px;
-    font-style: italic;
     background: #FFFFFF;
     border: 1px solid #C6D0EA;
     border-radius: 5px;
     line-height: 19px;
+    color: #8893B0;
+}
+.fg-search input::placeholder {
+    font-weight: 400;
+    font-style: italic;
     color: #8893B0;
 }
 
