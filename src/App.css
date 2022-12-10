@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: Lato;
+    font-family: Lato, serif;
 }
 
 .container {
@@ -13,58 +13,73 @@
     align-items: center;
 }
 .app-wrapper {
-    /*background-color: #FBFEFF;*/
-    min-width: 450px;
+    margin: 10px;
+    background-color: #FBFEFF;
+    /*min-width: 400px;*/
     min-height: 650px;
-    /*padding: 30px;*/
     box-sizing: border-box;
-    /*border-radius: 10px;
-    box-shadow: 3px 6px 40px #000;*/
-    background: #FBFEFF;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .header {
+    position: relative;
+    height: 56px;
     color: #FFFFFF;
-    font-size: 16px;
-
-}
-.header h1 {
-    font-weight: normal;
-    /*color: #fff;*/
-    text-align: left;
-    /*margin: 30px 0;*/
-    padding: 16px;
     font-size: 16px;
     background: #8893B0;
     border-radius: 10px 10px 0px 0px;
 }
-.task-input {
-    outline: none;
-    width: 260px;
-    padding: 15px;
-    margin-right: 25px;
-    font-size: 20px;
-    color: #ccc;
-    bacground-color: #000;
-    border: 1px solid #c89666;
-    border-radius: 10px;
-}
-.button-add {
-    width: 70px;
-    padding: 15px 15px;
-    font-size: 20px;
-    border-radius: 10px;
-    border: 0;
-    background-color: #f1af71;
+.header .back {
     cursor: pointer;
+    left: 15px;
+    display: inline-block;
+    width:10px;
+    height: 17px;
+    background-image: url("assets/back.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
 }
+.header .close {
+    cursor: pointer;
+    right: 15px;
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-image: url("assets/close.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+.header .title {
+    left: 35px;
+}
+
 .list-item {
+    position: relative;
     display: flex;
-    margin: 20px 0;
+    margin: 5px 0;
     border-radius: 10px;
     padding: 10px;
-    max-height: 30px;
+    height: 50px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
+.list-item:hover {
+    background: #ECF5F8;
+}
+.list-item:hover .edge {
+    display: block;
+}
+.list-item .edge {
+    position: absolute;
+    display: none;
+    top:0;
+    left:0;
+    width: 8px;
+    height: 100%;
+    background-color: #4BD0FD;
+    border-radius: 5px 0px 0px 5px;
 }
 .list-item button {
     padding: 5px;
@@ -73,37 +88,39 @@
 .list-item button.active {
     background: orange;
 }
-.button-complete,
-.button-delete,
-.button-edit {
-    border: none;
-    outline: none;
+.list-item .control {
+    right: 15px;
+}
+.list-item:hover .control span.favorite,
+.list-item:hover .control span.delete {
+    visibility: visible;
+}
+.list-item .control span.favorite.active {
+    visibility: visible;
+    background-image: url("assets/star_fill.svg");
+}
+.list-item .control span.delete {
     cursor: pointer;
-    bacground-color: transparent;
-    font-size: 28px;
-    border-radius: 50%;
+    display: inline-block;
+    visibility: hidden;
+    width:15px;
+    height: 22px;
+    background-image: url("assets/basket.svg");
+    background-repeat: no-repeat;
 }
-.button-complete {
-    color: #ff6c6c;
+.list-item .control span.favorite {
     margin-right: 10px;
-}
-.button-edit {
-    color: #e2d029;
-    margin-right: 10px;
-}
-.button-delete {
-    color: lightseagreen;
-}
-.complete {
-    text-decoration-style: solid;
-    text-decoration-line: line-through;
-    text-decoration-color: #ff6c6c;
+    cursor:pointer;
+    display: inline-block;
+    visibility: hidden;
+    width:23px;
+    height: 23px;
+    background-image: url("assets/star_blank.svg");
+    background-repeat: no-repeat;
 }
 .list {
-    width: 220px;
-    bacground-color: #12343b;
+    /*width: 220px;*/
     border: none;
-    font-size: 20px;
     padding-left: 10px;
     margin-right: 15px;
 }
@@ -112,50 +129,109 @@ input:focus,
 button:focus {
     outline: none
 }
-.input-search {
+.fg-search {
+    position: relative;
+    /*width: 360px;*/
+}
+
+.fg-search input {
+    text-indent: 32px;
     padding: 10px;
+    display: block;
     width: 420px;
     height: 20px;
     margin: 15px;
     font-style: italic;
     background: #FFFFFF;
     border: 1px solid #C6D0EA;
+    border-radius: 5px;
     line-height: 19px;
     color: #8893B0;
+}
+
+.fg-search span {
+    width: 27px;
+    height: 26px;
+    background-image: url("assets/search_icon.svg");
+    background-repeat: no-repeat;
+    border: none;
+    display: inline-block;
+    position: absolute;
+    top: 7px;
+    left: 24px;
+    z-index: 2;
+}
+.control-buttons {
+    margin: 15px 0;
+    display: flex;
+    position: relative;
+}
+.control-buttons div {
+    padding: 4px;
+    background: #ECF5F8;
+    border-radius: 8px;
+}
+.control-buttons div.result {
+    background: none;
+    font-weight: 700;
+    color: #8893B0;
+    height: 50px;
 }
 .filter-button-left,
 .filter-button-right
 {
-    background: #ECF5F8;
+    display: inline-block;
+    cursor: pointer;
     padding: 15px;
+    color: #8893B0;
 }
 .filter-button-left {
-    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
     border-radius: 8px 0px 0px 8px;
 }
 .filter-button-right {
-    padding: 15px;
     border-radius: 0px 8px 8px 0px;
-    margin-right: auto;
 }
 .filter-button-left.active,
 .filter-button-right.active {
+    box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.15);
     font-weight: bold;
     background: #FFFFFF;
+    color: #000;
 }
-.control-buttons {
-    padding: 15px;
-    display: flex;
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.divide {
+    border-top: 1px solid #C6D0EA;
+    margin:20px 15px 0 15px;
 }
 .sort-button {
-    display:inline;
-    padding:2px;
+    cursor: pointer;
+    width: 45px;
+    height: 20px;
+    display: inline-block;
+    padding: 2px;
     background: #4BD0FD;
-    border-radius: 9px;
-    border:none;
+    border-radius: 15px;
+    border: none;
+    right: 0px;
+}
+.sort-button.down {
+    background-image: url("assets/sort_icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.sort-button.up {
+    background-image: url("assets/rsort_icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .scroll-box {
-    padding:15px;
+    padding: 0 15px;
     width: 445px;
     height: 410px;
     overflow-x: hidden;

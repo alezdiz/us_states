@@ -17,22 +17,21 @@ const State = ({state}) => {
 
   return (
 
-      <li className="list-item">
-        <span className="list">{state.name}</span>
-        <div>
-          <button
+      <div className="list-item">
+        <div className="edge"></div>
+        <span className="list vertical-center">{state.name}</span>
+        <div className="control vertical-center">
 
-            onClick={() => handleDelete(state.abbreviation)}>
-            Del
-          </button>
+          <span
+            className={`favorite${stateStore.favorites.includes(state.abbreviation) ? ' active' : ""}`}
+            onClick={() => toggleFavorite(state.abbreviation)}></span>
 
-          <button
-            class={`${stateStore.favorites.includes(state.abbreviation) && 'active'}`}
-            onClick={() => toggleFavorite(state.abbreviation)}>
-            Star
-          </button>
+          <span
+            className="delete"
+            onClick={() => handleDelete(state.abbreviation)}></span>
+
         </div>
-      </li>
+      </div>
 
   );
 };

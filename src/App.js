@@ -1,18 +1,13 @@
 import './App.css';
-//import './style.css';
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {observer} from "mobx-react";
-import {configure} from "mobx";
-import UStateStore, {UStateStoreContext} from "./store/StatesStore";
+import {UStateStoreContext} from "./store/StatesStore";
 import Search from "./components/Search";
 import Sort from "./components/Sort";
-import StateList from "./components/StateList";
 import Header from "./components/Header";
 import State from "./components/State";
-
-/*configure({
-  useProxies: "never"
-})*/
+import Result from "./components/Result";
+import ControlButtons from "./components/ControlButtons";
 
 const App = observer(() => {
   const stateStore = useContext(UStateStoreContext)
@@ -31,8 +26,11 @@ const App = observer(() => {
         <div>
           <Search />
         </div>
-        <div>
-          <Sort />
+        <div className="divide">
+          <div className="control-buttons">
+            {stateStore.searchQuery ? <Result /> : <ControlButtons />}
+            <Sort />
+          </div>
         </div>
         <div className="scroll-box">
           {stateStore.states && stateStore.states.map(state => {

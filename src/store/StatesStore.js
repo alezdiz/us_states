@@ -23,10 +23,10 @@ class StatesStore {
           const regexp = new RegExp(this.searchQuery,"i");
           states = states.filter(state => state.name.match(regexp))
         }
-        if (this.showType == "favorite") {
-          states = states.filter(state => this.favorites.includes(state.abbreviation))
+        if (!this.searchQuery && this.showType === "favorite") {
+            states = states.filter(state => this.favorites.includes(state.abbreviation))
         }
-        if (this.sort == 'zA') {
+        if (this.sort === 'zA') {
           states = this.selectionSort(states)
         }
         this.setStates(states)
@@ -42,7 +42,7 @@ class StatesStore {
   }
 
   toggleShowType() {
-    if (this.showType == "all")
+    if (this.showType === "all")
       this.showType = "favorite"
     else
       this.showType = "all"
@@ -68,7 +68,7 @@ class StatesStore {
   }
 
   toggleSort() {
-    if (this.sort == 'aZ')
+    if (this.sort === 'aZ')
       this.sort = 'zA'
     else
       this.sort = 'aZ'
@@ -93,4 +93,3 @@ class StatesStore {
 }
 
 export const UStateStoreContext = createContext(new StatesStore());
-export default new StatesStore()

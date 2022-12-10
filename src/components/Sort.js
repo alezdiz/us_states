@@ -1,7 +1,7 @@
 import React, {useContext} from 'react';
 import {UStateStoreContext} from "../store/StatesStore";
 
-const Sort = (props) => {
+const Sort = () => {
   const stateStore = useContext(UStateStoreContext)
 
   const handleSort = () => {
@@ -10,26 +10,10 @@ const Sort = (props) => {
   }
 
   return (
-    <div className="control-buttons">
-      <button
-        className={`filter-button-left ${stateStore.showType == "all" && 'active'}`}
-        onClick={() => stateStore.toggleShowType()}
-      >
-        All States
-      </button>
-      <button
-        className={`filter-button-right ${stateStore.showType == "favorite" && 'active'}`}
-        onClick={() => stateStore.toggleShowType()}
-      >
-        Favorites
-      </button>
-      <button className="sort-button" onClick={handleSort}>
-        AZ
-        {stateStore.sort == "aZ" ? "down" : "up"}
-      </button>
-    </div>
-
-
+      <span
+        className={`vertical-center sort-button ${stateStore.sort === "aZ" ? "down" : "up"}`}
+        onClick={handleSort}
+      ></span>
   );
 };
 

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {UStateStoreContext} from "../store/StatesStore";
 
 const Search = () => {
@@ -9,7 +9,8 @@ const Search = () => {
   }
 
   return (
-    <div>
+    <div className="fg-search">
+      <span></span>
       <input
         className="input-search"
         value={stateStore.searchQuery}
