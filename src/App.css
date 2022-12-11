@@ -71,6 +71,10 @@ body::after{
 .list-item:hover {
     background: #ECF5F8;
 }
+.list-item:hover .list {
+    background: #ECF5F8;
+    font-weight: 700;
+}
 .list-item:hover .edge {
     display: block;
 }
