@@ -6,7 +6,6 @@ const Sort = () => {
 
   const handleSort = () => {
     stateStore.toggleSort()
-    stateStore.getStates() //selectionSort(stateStore.states)
   }
 
   return (

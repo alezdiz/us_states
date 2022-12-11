@@ -5,14 +5,11 @@ const State = ({state}) => {
   const stateStore = useContext(UStateStoreContext)
 
   const handleDelete = (id) => {
-    console.log("handleDelete", id)
     stateStore.pushDeleted(id)
-    stateStore.getStates()
   }
 
   const toggleFavorite = (id) => {
     stateStore.toggleFavorite(id)
-    stateStore.getStates()
   }
 
   return (

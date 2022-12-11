@@ -13,9 +13,18 @@ const App = observer(() => {
   const stateStore = useContext(UStateStoreContext)
 
   useEffect(() => {
-    console.log('useEffect')
-    stateStore.getStates()
-  }, [stateStore.searchQuery, stateStore.showType, stateStore.trash])
+    stateStore.fetchStates()
+  }, [])
+
+  useEffect(() => {
+    stateStore.filterStates()
+  }, [
+    stateStore.sort,
+    stateStore.searchQuery,
+    stateStore.showType,
+    stateStore.trash,
+    stateStore.favorites
+  ])
 
   return (
     <div className="container">
