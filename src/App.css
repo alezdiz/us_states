@@ -5,7 +5,7 @@
 }
 body::after{
     position:absolute; width:0; height:0; overflow:hidden; z-index:-1; /*hide images*/
-    content:url(assets/star_fill.svg); /*load images*/
+    content:url(assets/star_fill.svg) url(assets/rsort_icon.svg); /*load images*/
 }
 .container {
     background: #FBFEFF;
