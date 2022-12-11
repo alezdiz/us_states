@@ -3,12 +3,6 @@ import {UStateStoreContext} from "../store/StatesStore";
 
 const Sort = () => {
   const stateStore = useContext(UStateStoreContext)
-/*
-
-  const handleSort = () => {
-    stateStore.toggleSort()
-  }
-*/
 
   return (
       <span

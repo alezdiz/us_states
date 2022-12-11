@@ -4,14 +4,6 @@ import {UStateStoreContext} from "../store/StatesStore";
 const State = ({state}) => {
   const stateStore = useContext(UStateStoreContext)
 
-  /*const handleDelete = (id) => {
-    stateStore.pushDeleted(id)
-  }*/
-
-  /*const toggleFavorite = (id) => {
-    stateStore.toggleFavorite(id)
-  }*/
-
   return (
 
       <div className="list-item">
