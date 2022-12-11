@@ -3,15 +3,17 @@ import {UStateStoreContext} from "../store/StatesStore";
 
 const Sort = () => {
   const stateStore = useContext(UStateStoreContext)
+/*
 
   const handleSort = () => {
     stateStore.toggleSort()
   }
+*/
 
   return (
       <span
-        className={`vertical-center sort-button ${stateStore.sort === "aZ" ? "down" : "up"}`}
-        onClick={handleSort}
+        className={`vertical-center sort-button ${stateStore.sortType === "aZ" ? "down" : "up"}`}
+        onClick={stateStore.sortStates}
       ></span>
   );
 };

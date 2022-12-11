@@ -5,11 +5,9 @@ import {selectionSort, selectionRSort} from "../service/sort";
 class StatesStore {
   originStates = []
   states = []
-  showType = "all"
   searchQuery = ''
-  favorites = []
-  trash = []
-  sort = 'aZ'
+  showType = "all"
+  sortType = 'aZ'
 
   constructor() {
     makeAutoObservable(this)
@@ -28,24 +26,6 @@ class StatesStore {
       });
   }
 
-  filterStates () {
-    let states = [...this.originStates];
-    states = states.filter(state => !this.trash.includes(state.abbreviation));
-    if (this.searchQuery) {
-      const regexp = new RegExp(this.searchQuery,"i");
-      states = states.filter(state => state.name.match(regexp))
-    }
-    if (!this.searchQuery && this.showType === "favorite") {
-      states = states.filter(state => this.favorites.includes(state.abbreviation))
-    }
-    if (this.sort === 'aZ') {
-      states = selectionSort(states)
-    } else {
-      states = selectionRSort(states)
-    }
-    this.setStates(states);
-  }
-
   setOriginStates(states) {
     this.originStates = states
   }
@@ -55,36 +35,74 @@ class StatesStore {
   }
 
   toggleShowType() {
-    if (this.showType === "all")
+    if (this.showType === "all") {
       this.showType = "favorite"
-    else
-      this.showType = "all"
-  }
-
-  setSearchQuery(type) {
-    this.searchQuery = type;
-  }
-
-  toggleFavorite(id) {
-    let i = this.favorites.indexOf(id)
-    if (i !== -1) {
-      this.favorites = [...this.favorites].filter(fav => fav !== id)
+      this.filter('favorite')
     } else {
-      this.favorites = [...this.favorites, id]
+      this.showType = "all"
+      this.filter()
     }
   }
 
-  pushDeleted(id) {
-    this.trash = [...this.trash, id]
+  searchState = (query) => {
+    this.searchQuery = query.trim();
+    const regexp = new RegExp(this.searchQuery,"i");
+    this.originStates.map(state => {
+      if (state.name.match(regexp)) {
+        return state.inSearch = true;
+      } else {
+        return state.inSearch = false;
+      }
+    });
+    this.filter()
   }
 
-  toggleSort() {
-    if (this.sort === 'aZ')
-      this.sort = 'zA'
-    else
-      this.sort = 'aZ'
+  defineFilter = () => {
+    if (this.searchQuery) return "search";
+    else if (this.showType === "favorite") return "favorite";
   }
 
+  filter = (type) => {
+    if (!type)
+      type = this.defineFilter();
+    let states;
+    switch (type) {
+      case "search":
+        states = this.originStates;
+        this.states = states.filter(state => state.inSearch === true);
+        break;
+      case "favorite":
+        states = this.originStates;
+        this.states = states.filter(state => state.favorite === true);
+        break;
+      default:
+        this.states = this.originStates;
+        break;
+    }
+  }
+
+  favoriteState(id) {
+    this.originStates = this.originStates.map(state => state.abbreviation === id ? {...state, favorite: !state.favorite} : state)
+    this.filter()
+  }
+
+  removeState = (id) => {
+    this.originStates = this.originStates.filter(state => state.abbreviation !== id)
+    this.filter()
+  }
+
+  sortStates = () => {
+    if (this.sortType === 'aZ') {
+      this.sortType = 'zA'
+      this.states = selectionRSort(this.states);
+      this.originStates = selectionRSort(this.originStates)
+    }else{
+      this.sortType = 'aZ'
+      this.states = selectionSort(this.states);
+      this.originStates = selectionSort(this.originStates)
+    }
+
+  }
 
 }
 

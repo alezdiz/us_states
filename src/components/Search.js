@@ -5,7 +5,7 @@ const Search = () => {
   const stateStore = useContext(UStateStoreContext)
 
   const handleSearch = (e) => {
-    stateStore.setSearchQuery(e.target.value);
+    stateStore.searchState(e.target.value);
   }
 
   return (

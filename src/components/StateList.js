@@ -4,10 +4,14 @@ import State from "./State";
 
 const StateList = () => {
   const stateStore = useContext(UStateStoreContext)
-  
+
+  useEffect(() => {
+    stateStore.fetchStates()
+  }, [])
+
   return (
     <div>
-      {stateStore.states && stateStore.states.map(state => {
+      {!!stateStore.states.length && stateStore.states.map(state => {
         return <State key={state.abbreviation} state={state}/>
       })}
     </div>

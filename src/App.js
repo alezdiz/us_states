@@ -16,16 +16,6 @@ const App = observer(() => {
     stateStore.fetchStates()
   }, [])
 
-  useEffect(() => {
-    stateStore.filterStates()
-  }, [
-    stateStore.sort,
-    stateStore.searchQuery,
-    stateStore.showType,
-    stateStore.trash,
-    stateStore.favorites
-  ])
-
   return (
     <div className="container">
       <div className="app-wrapper">
@@ -42,7 +32,7 @@ const App = observer(() => {
           </div>
         </div>
         <div className="scroll-box">
-          {stateStore.states && stateStore.states.map(state => {
+          {!!stateStore.states.length && stateStore.states.map(state => {
             return <State key={state.abbreviation} state={state}/>
           })}
         </div>
