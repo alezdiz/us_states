@@ -48,7 +48,8 @@ class StatesStore {
 
   searchState = (query) => {
     this.searchQuery = query.trim();
-    const regexp = new RegExp(this.searchQuery,"i");
+    this.searchQuery = this.searchQuery.charAt(0).toUpperCase() + this.searchQuery.slice(1);
+    const regexp = new RegExp('^'+this.searchQuery,"i");
     this.originStates.map(state => {
       if (state.name.match(regexp)) {
         return state.inSearch = true;
