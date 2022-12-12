@@ -188,7 +188,7 @@ button:focus {
     border: none;
     display: inline-block;
     position: absolute;
-    top: 15px;
+    top: 17px;
     right: 14px;
     z-index: 2;
 }
