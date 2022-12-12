@@ -10,13 +10,17 @@ const Search = () => {
 
   return (
     <div className="fg-search">
-      <span></span>
+      <span className="search-icon"></span>
       <input
         className="input-search"
         value={stateStore.searchQuery}
         onChange={handleSearch}
         placeholder="Search"
       />
+      <span
+        className="close-icon"
+        onClick={() => stateStore.searchState('')}
+      ></span>
     </div>
   );
 };

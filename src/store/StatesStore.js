@@ -31,7 +31,9 @@ class StatesStore {
   }
 
   setStates(states) {
+    console.log('setstates')
     this.states = states
+    console.log(this.states)
   }
 
   toggleShowType() {
